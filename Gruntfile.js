@@ -51,7 +51,9 @@ module.exports = function(grunt) {
 	});
 
 
-	grunt.loadNpmTasks('grunt-contrib');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask('commonBefore', 	[/* ここに共通タスクネーム記述 */]);
 	grunt.registerTask('deploy', 		['commonBefore' /* ここにdeploy専用タスクネーム記述 */]);
