@@ -1,62 +1,62 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-	'use strict';
+    'use strict';
 
-	grunt.initConfig({
+    grunt.initConfig({
 
-		/*
-		 * 初期設定
-		 * */
-		dirs	: {
-			deploy	:	'deploy',
-			release	:	'_release',
-			src		:	'src'
-		},
+        /*
+         * Initial setting
+         * */
+        dirs: {
+            deploy: 'deploy',
+            release: '_release',
+            src: 'src'
+        },
 
-		pkg		:	grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON('package.json'),
 
-		copy	:	{
-			toRelease : {
-				files : [{
-					expand : true,
-					cwd : '<%= dirs.deploy %>',
-					src : ['**'],
-					dest : '<%= dirs.release %>'
-				}],
-				dot : true
-			}
-		},
+        copy: {
+            toRelease: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= dirs.deploy %>',
+                    src: ['**'],
+                    dest: '<%= dirs.release %>'
+                }],
+                dot: true
+            }
+        },
 
-		clean : {
-			allRelease : ['<%= dirs.release %>/**']
-		},
+        clean: {
+            allRelease: ['<%= dirs.release %>/**']
+        },
 
-		watch : {
-			deploy : {
-				files : ['<%= dirs.src %>/**'],
-				tasks : ['deploy']
-			},
+        watch: {
+            deploy: {
+                files: ['<%= dirs.src %>/**'],
+                tasks: ['deploy']
+            },
 
-			release : {
-				files : ['<%= dirs.src %>/**'],
-				tasks : ['release']
-			}
-		}
+            release: {
+                files: ['<%= dirs.src %>/**'],
+                tasks: ['release']
+            }
+        }
 
-		/*
-		 * カスタム設定
-		 * */
-		/* ここからタスク記述 */
+        /*
+         * Custom setting
+         * */
+        /* Tasks from here */
 
-	});
+    });
 
 
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('commonBefore', 	[/* ここに共通タスクネーム記述 */]);
-	grunt.registerTask('deploy', 		['commonBefore' /* ここにdeploy専用タスクネーム記述 */]);
-	grunt.registerTask('release', 		['commonBefore', 'clean:allRelease', 'copy:toRelease'/* ここにrelease専用タスクネーム記述 */]);
-	grunt.registerTask('default', 		['release']);
+    grunt.registerTask('commonBefore', [/* Common tasks here */]);
+    grunt.registerTask('deploy', ['commonBefore' /* Deploy tasks here */]);
+    grunt.registerTask('release', ['commonBefore', 'clean:allRelease', 'copy:toRelease'/* Release tasks here */]);
+    grunt.registerTask('default', ['release']);
 };
